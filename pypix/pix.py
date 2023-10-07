@@ -1,7 +1,7 @@
 import re
 import os
 import sys
-import crc16
+from binascii import crc_hqx
 import base64
 import qrcode
 from unicodedata import normalize
@@ -49,7 +49,7 @@ def formatted_text(value):
 
 def crc_compute(hex_string):
     msg = bytes(hex_string, 'utf-8')
-    crc = crc16.crc16xmodem(msg, 0xffff)
+    crc = crc_hqx(msg, 0xffff)
     return '{:04X}'.format(crc & 0xffff)
 
 
